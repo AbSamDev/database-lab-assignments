@@ -105,8 +105,7 @@ INSERT INTO departments VALUES
         , 'Contracting'  
         , NULL  
         , 1700  
-        );  
-SELECT* FROM DEPARTMENTS
+        );
 
 /* -------------------- EMPLOLYEES TABLE -------------------- */ 
 CREATE TABLE EMPLOYEES(
@@ -223,8 +222,6 @@ INSERT INTO employees VALUES
         , 50  
         );  
   
-
-  
 INSERT INTO employees VALUES   
         ( 141  
         , 'Trenna'  
@@ -280,7 +277,6 @@ INSERT INTO employees VALUES
         , 124  
         , 50  
         );  
-  
   
 INSERT INTO employees VALUES   
         ( 149  
@@ -426,6 +422,7 @@ INSERT INTO jobs VALUES
         , 20080  
         , 40000  
         );  
+	
 INSERT INTO jobs VALUES   
         ( 'AD_VP'  
         , 'Administration Vice President'  
@@ -453,6 +450,7 @@ INSERT INTO jobs VALUES
         , 4200  
         , 9000  
         );  
+	
 INSERT INTO jobs VALUES   
         ( 'SA_MAN'  
         , 'Sales Manager'  
@@ -473,13 +471,13 @@ INSERT INTO jobs VALUES
         , 5500  
         , 8500  
         );  
+	
 INSERT INTO jobs VALUES   
         ( 'ST_CLERK'  
         , 'Stock Clerk'  
         , 2008  
         , 5000  
         );  
-  
 
 INSERT INTO jobs VALUES   
         ( 'IT_PROG'  
@@ -544,6 +542,7 @@ INSERT INTO jobs VALUES
         , 25000  
         , 40000  
         );  
+	
 /* -------------------- JOB_HISTORY TABLE -------------------- */
 CREATE TABLE JOB_HISTORY(
 EMPLOYEE_ID INT,
@@ -553,16 +552,91 @@ JOB_ID VARCHAR(10),
 DEAPRTMENT_ID INT
 )
 
+INSERT INTO job_history  
+VALUES (102  
+       , '1999-feb-07'   /* YY-MM-DD */
+       , '2020-feb-01'   /* YY-MM-DD */   
+       , 'IT_PROG'  
+       , 60);  
+  
+INSERT INTO job_history  
+VALUES (101  
+       , '1999-feb-07'   /* YY-MM-DD */ 
+       , '2020-feb-01'   /* YY-MM-DD */   
+       , 'AC_ACCOUNT'  
+       , 110);  
+  
+INSERT INTO job_history  
+VALUES (101  
+       , '1999-feb-07'   /* YY-MM-DD */  
+       , '2020-feb-01'   /* YY-MM-DD */   
+       , 'AC_MGR'  
+       , 110);  
+  
+INSERT INTO job_history  
+VALUES (201  
+       , '1999-feb-07'   /* YY-MM-DD */  
+       , '2020-feb-01'   /* YY-MM-DD */   
+       , 'MK_REP'  
+       , 20);  
+  
+INSERT INTO job_history  
+VALUES  (114  
+        , '1999-feb-07'   /* YY-MM-DD */  
+        , '2020-feb-01'   /* YY-MM-DD */   
+        , 'ST_CLERK'  
+        , 50  
+        );  
+  
+INSERT INTO job_history  
+VALUES  (122  
+        , '1999-feb-07'   /* YY-MM-DD */  
+        , '2020-feb-01'   /* YY-MM-DD */   
+        , 'ST_CLERK'  
+        , 50  
+        );  
+  
+INSERT INTO job_history  
+VALUES  (200  
+        , '1999-feb-07'   /* YY-MM-DD */  
+        , '2020-feb-01'   /* YY-MM-DD */ 
+        , 'AD_ASST'  
+        , 90  
+        );  
+  
+INSERT INTO job_history  
+VALUES  (176  
+        , '1999-feb-07'   /* YY-MM-DD */  
+		, '2020-feb-01'   /* YY-MM-DD */ 
+        , 'SA_REP'  
+        , 80  
+        );  
+  
+INSERT INTO job_history  
+VALUES  (176  
+        , '1999-feb-07'   /* YY-MM-DD */  
+        , '2020-feb-01'   /* YY-MM-DD */   
+        , 'SA_MAN'  
+        , 80  
+        );  
+  
+INSERT INTO job_history  
+VALUES  (200  
+        , '1999-feb-07'   /* YY-MM-DD */
+        , '2020-feb-01'   /* YY-MM-DD */ 
+        , 'AC_ACCOUNT'  
+        , 90  
+	);
+	
 /* -------------------- LOCATIONS TABLE -------------------- */
 CREATE TABLE LOCATIONS(
-LOCATION_ID INT,
+LOCATION_ID INT PRIMARY KEY,
 STREET_ADDRESS VARCHAR(40),
 POSTAL_CODE VARCHAR(12),
 CITY VARCHAR(30),
 STATE_PROVINCE VARCHAR(50),
 COUNTRY_ID CHAR(2)
 )
-
 
 INSERT INTO locations VALUES   
         ( 1400   
@@ -599,6 +673,7 @@ INSERT INTO locations VALUES
         , 'Ontario'  
         , 'CA'  
         );  
+	
 INSERT INTO locations VALUES   
         ( 2500   
         , 'Magdalen Centre, The Oxford Science Park'  
@@ -634,5 +709,5 @@ INSERT INTO REGIONS VALUES
         ( 4  
         , 'Middle East and Africa'   
         );
-SELECT * FROM REGIONS		  
+
 
