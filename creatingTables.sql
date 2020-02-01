@@ -106,7 +106,7 @@ INSERT INTO departments VALUES
         , NULL  
         , 1700  
         );
-
+		
 /* -------------------- EMPLOLYEES TABLE -------------------- */ 
 CREATE TABLE EMPLOYEES(
 EMPLOYEE_ID INT PRIMARY KEY,
@@ -545,7 +545,7 @@ INSERT INTO jobs VALUES
 	
 /* -------------------- JOB_HISTORY TABLE -------------------- */
 CREATE TABLE JOB_HISTORY(
-EMPLOYEE_ID INT PRIMARY KEY,
+EMPLOYEE_ID INT,
 STARTING_DATE DATE, /*-----*/
 ENDING_DATE DATE,  /*-----*/
 JOB_ID VARCHAR(10),
@@ -683,7 +683,6 @@ INSERT INTO locations VALUES
         , 'UK'  
         );  
   
- 
 /* -------------------- REGIONS TABLE -------------------- */
 CREATE TABLE REGIONS(
 REGION_ID VARCHAR(25) PRIMARY KEY,
