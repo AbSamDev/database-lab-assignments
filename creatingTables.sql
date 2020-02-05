@@ -11,13 +11,78 @@
   ;+-------------------------------------------+ 
 */
 
+CREATE DATABASE DB_Assignment
+USE DB_Assignment
+
+/* ------------TABLES */
+
 /* -------------------- COUNTRIES TABLE -------------------- */ 
 CREATE TABLE COUNTRIES(
 COUNTRY_ID CHAR(2) PRIMARY KEY,
 COUNTRY_NAME VARCHAR(40),
-REGION_ID INT
+REGION_ID VARCHAR(25) FOREIGN KEY REFERENCES REGIONS(REGION_ID)
 )
+/* -------------------- DEPARTMENTS TABLE -------------------- */ 
+CREATE TABLE DEPARTMENTS(
+DEPARTMENTS_ID INT PRIMARY KEY,
+DEPARTMENTS_NAME VARCHAR(30),
+MANAGER_ID INT,
+LOCATION_ID INT FOREIGN KEY REFERENCES LOCATIONS(LOCATION_ID) 
+)	
+/* -------------------- EMPLOLYEES TABLE -------------------- */ 
+CREATE TABLE EMPLOYEES(
+EMPLOYEE_ID INT PRIMARY KEY,
+FIRST_NAME VARCHAR(20),
+LAST_NAME VARCHAR(25),
+EMAIL VARCHAR(25),
+PHONE_NUMBER VARCHAR(20),
+HIRE_DATE DATE,
+JOB_ID VARCHAR(10) FOREIGN KEY REFERENCES JOBS(JOB_ID),
+SALARY INT FOREIGN KEY REFERENCES EMPLOYEES(EMPLOYEE_ID),
+COMMISION_PCT FLOAT(24),
+MANAGER_ID INT UNIQUE,
+DEPATMENTS_ID INT FOREIGN KEY REFERENCES DEPARTMENTS(DEPARTMENTS_ID)
+)
+/* Extra query to reference manager's id */
+ALTER TABLE DEPARTMENTS
+ADD FOREIGN KEY (MANAGER_ID) REFERENCES EMPLOYEES(MANAGER_ID)
 
+/* -------------------- JOBS TABLE -------------------- */
+CREATE TABLE JOBS(
+JOB_ID  VARCHAR(10) PRIMARY KEY,
+JOB_TITLE VARCHAR(35),
+MIN_SALARY INT,
+MAX_SALARY INT
+)
+/* -------------------- JOB_GRADES TABLE -------------------- */
+CREATE TABLE JOB_GRADES(
+GRADE_LEVEL VARCHAR(3) PRIMARY KEY,
+LOWEST_SAL INT,
+HIGHEST_SAL INT
+)
+/* -------------------- JOB_HISTORY TABLE -------------------- */
+CREATE TABLE JOB_HISTORY(
+EMPLOYEE_ID INT FOREIGN KEY REFERENCES EMPLOYEES(EMPLOYEE_ID),
+STARTING_DATE DATE, /*-----*/
+ENDING_DATE DATE,  /*-----*/
+JOB_ID VARCHAR(10) FOREIGN KEY REFERENCES JOBS(JOB_ID),
+DEAPRTMENTS_ID INT FOREIGN KEY REFERENCES DEPARTMENTS(DEPARTMENTS_ID)
+)
+/* -------------------- LOCATIONS TABLE -------------------- */
+CREATE TABLE LOCATIONS(
+LOCATION_ID INT PRIMARY KEY,
+STREET_ADDRESS VARCHAR(40),
+POSTAL_CODE VARCHAR(12),
+CITY VARCHAR(30),
+STATE_PROVINCE VARCHAR(50),
+COUNTRY_ID CHAR(2) FOREIGN KEY REFERENCES COUNTRIES(COUNTRY_ID) 
+)
+/* -------------------- REGIONS TABLE -------------------- */
+CREATE TABLE REGIONS(
+REGION_ID VARCHAR(25) PRIMARY KEY,
+REGION_NAME VARCHAR(50)
+)
+/* -------------------- COUNTRIES TABLE's DATA -------------------- */ 
 INSERT INTO countries VALUES   
         ( 'CA'  
         , 'Canada'  
@@ -42,14 +107,7 @@ INSERT INTO countries VALUES
         , 2   
         );  
 
-/* -------------------- DEPARTMENTS TABLE -------------------- */ 
-CREATE TABLE DEPARTMENTS(
-DEPARTMENTS_ID INT PRIMARY KEY,
-DEPARTMENTS_NAME VARCHAR(30),
-MANAGER_ID INT,
-LOCATION_ID INT
-)
-
+/* -------------------- DEPARTMENTS TABLE's DATA -------------------- */ 
 INSERT INTO departments VALUES   
         ( 10  
         , 'Administration'  
@@ -107,21 +165,7 @@ INSERT INTO departments VALUES
         , 1700  
         );
 		
-/* -------------------- EMPLOLYEES TABLE -------------------- */ 
-CREATE TABLE EMPLOYEES(
-EMPLOYEE_ID INT PRIMARY KEY,
-FIRST_NAME VARCHAR(20),
-LAST_NAME VARCHAR(25),
-EMAIL VARCHAR(25),
-PHONE_NUMBER VARCHAR(20),
-HIRE_DATE DATE,
-JOB_ID VARCHAR(10),
-SALARY INT,
-COMMISION_PCT FLOAT(24),
-MANAGER_ID INT,
-DEPATMENT_ID INT
-)
-
+/* -------------------- EMPLOLYEES TABLE's DATA -------------------- */ 
 INSERT INTO employees VALUES   
         ( 100  
         , 'Steven'  
@@ -408,14 +452,7 @@ INSERT INTO employees VALUES
         , 110  
         );  
 		
-/* -------------------- JOBS TABLE -------------------- */
-CREATE TABLE JOBS(
-JOB_ID  VARCHAR(10) PRIMARY KEY,
-JOB_TITLE VARCHAR(35),
-MIN_SALARY INT,
-MAX_SALARY INT
-)
-
+/* -------------------- JOBS TABLE's DATA -------------------- */
 INSERT INTO jobs VALUES   
         ( 'AD_PRES'  
         , 'President'  
@@ -500,58 +537,44 @@ INSERT INTO jobs VALUES
         , 9000  
         );   
 
-/* -------------------- JOB_GRADES TABLE -------------------- */
-CREATE TABLE JOB_GRADES(
-GRADE_LEVEL VARCHAR(3) PRIMARY KEY,
-LOWEST_SAL INT,
-HIGHEST_SAL INT
-)
-
-INSERT INTO jobs VALUES   
+/* -------------------- JOB_GRADES TABLE's DATA -------------------- */
+INSERT INTO job_grades VALUES   
         ( 'A' 
         , 1000  
         , 2999  
         );
 
-INSERT INTO jobs VALUES   
+INSERT INTO job_grades VALUES   
         ( 'B' 
         , 3000  
         , 5999  
         );  		   
 
-INSERT INTO jobs VALUES   
+INSERT INTO job_grades VALUES   
         ( 'C' 
         , 6000  
         , 9999  
         );  
 
-INSERT INTO jobs VALUES   
+INSERT INTO job_grades VALUES   
         ( 'D' 
         , 10000  
         , 14999  
         );  
 
-INSERT INTO jobs VALUES   
+INSERT INTO job_grades VALUES   
         ( 'E' 
         , 15000  
         , 24999  
         );  
 
-INSERT INTO jobs VALUES   
+INSERT INTO job_grades VALUES   
         ( 'F' 
         , 25000  
         , 40000  
         );  
 	
-/* -------------------- JOB_HISTORY TABLE -------------------- */
-CREATE TABLE JOB_HISTORY(
-EMPLOYEE_ID INT,
-STARTING_DATE DATE, /*-----*/
-ENDING_DATE DATE,  /*-----*/
-JOB_ID VARCHAR(10),
-DEAPRTMENT_ID INT
-)
-
+/* -------------------- JOB_HISTORY TABLE's DATA -------------------- */
 INSERT INTO job_history  
 VALUES (102  
        , '1999-feb-07'   /* YY-MM-DD */
@@ -628,16 +651,7 @@ VALUES  (200
         , 90  
 	);
 	
-/* -------------------- LOCATIONS TABLE -------------------- */
-CREATE TABLE LOCATIONS(
-LOCATION_ID INT PRIMARY KEY,
-STREET_ADDRESS VARCHAR(40),
-POSTAL_CODE VARCHAR(12),
-CITY VARCHAR(30),
-STATE_PROVINCE VARCHAR(50),
-COUNTRY_ID CHAR(2)
-)
-
+/* -------------------- LOCATIONS TABLE's DATA -------------------- */
 INSERT INTO locations VALUES   
         ( 1400   
         , '2014 Jabberwocky Rd'  
@@ -683,12 +697,7 @@ INSERT INTO locations VALUES
         , 'UK'  
         );  
   
-/* -------------------- REGIONS TABLE -------------------- */
-CREATE TABLE REGIONS(
-REGION_ID VARCHAR(25) PRIMARY KEY,
-REGION_NAME VARCHAR(50)
-)
-
+/* -------------------- REGIONS TABLE's DATA -------------------- */
 INSERT INTO REGIONS VALUES   
         ( 1  
         , 'Europe'   
