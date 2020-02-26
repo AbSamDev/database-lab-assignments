@@ -40,18 +40,21 @@ namespace Lab6Task
             EmailBox.Text = "";
             ContactBox.Text = "";
 
-
-
-
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'lab6TaskDataSet.myAPP' table. You can move, or remove it, as needed.
+            this.myAPPTableAdapter.Fill(this.lab6TaskDataSet.myAPP);
 
         }
 
         private void SaveButton_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
