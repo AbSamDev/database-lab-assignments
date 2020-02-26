@@ -35,6 +35,10 @@ namespace Lab6Task
             cmd.ExecuteNonQuery();
             MessageBox.Show("Data is saved succesfully");
             con.Close();
+            NameBox.Text = "";
+            CNICBox.Text = "";
+            EmailBox.Text = "";
+            ContactBox.Text = "";
 
 
 
